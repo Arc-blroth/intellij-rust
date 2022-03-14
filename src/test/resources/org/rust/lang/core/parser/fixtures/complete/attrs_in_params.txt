@@ -294,7 +294,7 @@ FILE
                 PsiElement(identifier)('S')
                 RsTypeArgumentListImpl(TYPE_ARGUMENT_LIST)
                   PsiElement(<)('<')
-                  RsBaseTypeImpl(BASE_TYPE)
+                  RsTypeReferenceImpl(TYPE_REFERENCE)
                     RsPathImpl(PATH)
                       PsiElement(Self)('Self')
                   PsiElement(>)('>')

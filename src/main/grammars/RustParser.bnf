@@ -229,7 +229,10 @@ TypeArgumentList ::= TypeArgumentListImpl {
 ColonTypeArgumentList ::= &'::' TypeArgumentListImpl { elementType = TypeArgumentList }
 
 private TypeArgumentListImpl ::= '::'? '<' !'=' <<list_element AnyTypeArgument>>* '>' { pin = 3 }
-private AnyTypeArgument ::= AssocTypeBinding | TypeReference | Lifetime | RestrictedConstExpr
+private AnyTypeArgument ::= <<typeReferenceOrAssocTypeBinding TypePathGenericArgsNoTypeQual AssocTypeBinding_upper TypePathGenericArgs ImplicitTraitType TraitType_upper>>
+                          | Lifetime
+                          | RestrictedConstExpr
+                          | never (AssocTypeBinding | TypeReference)
 
 AssocTypeBinding ::= TypePathGenericArgsNoTypeQual (AssocTypeBindingType | AssocTypeBindingBound) {
   extends = "org.rust.lang.core.psi.ext.RsStubbedElementImpl<?>"
@@ -237,6 +240,7 @@ AssocTypeBinding ::= TypePathGenericArgsNoTypeQual (AssocTypeBindingType | Assoc
   elementTypeFactory = "org.rust.lang.core.stubs.StubImplementationsKt.factory"
 }
 
+private AssocTypeBinding_upper ::= AssocTypeBindingType | AssocTypeBindingBound
 private AssocTypeBindingType ::=  '=' TypeReference { pin = 1 }
 private AssocTypeBindingBound ::=  ':' TypeBounds { pin = 1 }
 
@@ -909,6 +913,7 @@ TypeReference ::= ArrayType
                 | ForInType { // FIXME O(2^n) for types like `for<'a> A<for<'b> B<for<'c> C<...>>>`
   implements = "org.rust.lang.core.macros.RsExpandedElement"
   stubClass = "com.intellij.psi.stubs.StubBase"
+  elementTypeFactory = "org.rust.lang.core.stubs.StubImplementationsKt.factory"
   mixin = "org.rust.lang.core.psi.ext.RsTypeReferenceImplMixin"
   name = "type"
 }

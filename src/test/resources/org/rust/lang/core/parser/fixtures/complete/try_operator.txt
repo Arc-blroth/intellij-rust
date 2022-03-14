@@ -23,7 +23,7 @@ FILE
               RsTypeArgumentListImpl(TYPE_ARGUMENT_LIST)
                 PsiElement(::)('::')
                 PsiElement(<)('<')
-                RsBaseTypeImpl(BASE_TYPE)
+                RsTypeReferenceImpl(TYPE_REFERENCE)
                   RsPathImpl(PATH)
                     PsiElement(identifier)('i32')
                 PsiElement(>)('>')

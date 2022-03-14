@@ -11,10 +11,11 @@ FILE
         PsiElement(identifier)('Box')
         RsTypeArgumentListImpl(TYPE_ARGUMENT_LIST)
           PsiElement(<)('<')
-          RsFnPointerTypeImpl(FN_POINTER_TYPE)
-            PsiElement(fn)('fn')
-            PsiErrorElement:'(' expected, got '>'
-              <empty list>
+          RsTypeReferenceImpl(TYPE_REFERENCE)
+            RsFnPointerTypeImpl(FN_POINTER_TYPE)
+              PsiElement(fn)('fn')
+              PsiErrorElement:'(' expected, got '>'
+                <empty list>
           PsiElement(>)('>')
     PsiElement(;)(';')
   PsiWhiteSpace('\n')

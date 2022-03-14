@@ -429,6 +429,34 @@ object RustParserUtil : GeneratedParserUtilBase() {
         return result
     }
 
+    @JvmStatic
+    fun typeReferenceOrAssocTypeBinding(
+        b: PsiBuilder,
+        level: Int,
+        pathP1: Parser,
+        assocTypeBindingUpperP: Parser,
+        pathP2: Parser,
+        implicitTraitTypeP: Parser,
+        traitTypeUpperP: Parser
+    ): Boolean {
+        val refOrBinding = enter_section_(b)
+
+        if (!pathP1.parse(b, level)) {
+            val result = baseOrTraitType(b, level, pathP2, implicitTraitTypeP, traitTypeUpperP)
+            exit_section_(b, refOrBinding, TYPE_REFERENCE, result)
+            return result
+        }
+
+        if (!nextTokenIs(b, EQ) && !nextTokenIs(b, COLON)) {
+            exit_section_(b, refOrBinding, TYPE_REFERENCE, true)
+            return true
+        }
+
+        val result = assocTypeBindingUpperP.parse(b, level)
+        exit_section_(b, refOrBinding, ASSOC_TYPE_BINDING, result)
+        return result
+    }
+
     private val SPECIAL_MACRO_PARSERS: Map<String, (PsiBuilder, Int) -> Boolean>
     private val SPECIAL_EXPR_MACROS: Set<String>
 

@@ -468,7 +468,7 @@ FILE
             RsTypeArgumentListImpl(TYPE_ARGUMENT_LIST)
               PsiElement(::)('::')
               PsiElement(<)('<')
-              RsBaseTypeImpl(BASE_TYPE)
+              RsTypeReferenceImpl(TYPE_REFERENCE)
                 RsPathImpl(PATH)
                   PsiElement(identifier)('Z')
                   RsTypeArgumentListImpl(TYPE_ARGUMENT_LIST)
