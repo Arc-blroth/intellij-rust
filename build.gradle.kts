@@ -274,6 +274,7 @@ project(":plugin") {
         implementation(project(":idea"))
         implementation(project(":clion"))
         implementation(project(":debugger"))
+        implementation(project(":profiler"))
         implementation(project(":toml"))
         implementation(project(":copyright"))
         implementation(project(":coverage"))
@@ -481,6 +482,17 @@ project(":debugger") {
             version.set(clionVersion)
             plugins.set(clionPlugins)
         }
+    }
+    dependencies {
+        implementation(project(":"))
+        testImplementation(project(":", "testOutput"))
+    }
+}
+
+project(":profiler") {
+    intellij {
+        version.set(clionVersion)
+        plugins.set(clionPlugins)
     }
     dependencies {
         implementation(project(":"))
